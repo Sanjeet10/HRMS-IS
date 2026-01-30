@@ -1,4 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
-class InputData(BaseModel):
+class UserCreate(BaseModel):
     user_name: str
+    password: str
+
+    

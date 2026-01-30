@@ -1,11 +1,15 @@
 import uvicorn
 from fastapi import FastAPI
-from backend.schemas.employers import InputData
+from backend.schemas.employers import UserCreate
+from passlib.context import CryptContext
 
 app = FastAPI()
 
-@app.post("/employers_information")
-def employer_information(data: InputData):
-    return{
-        "recieved": data.user_name
+@app.post("/signup")
+def signup(user: UserCreate):
+
+    # Example DB save (fake)
+    return {
+        "username": user.user_name,
+        "password_saved_as": user.password
     }
