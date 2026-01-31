@@ -1,8 +1,8 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException
-from backend.schemas.employers import UserCreate
+from api.schemas.employers import UserCreate
 from passlib.context import CryptContext
-from backend.core.security import hash_password
+from api.core.security import hash_password
 
 app = FastAPI()
 
