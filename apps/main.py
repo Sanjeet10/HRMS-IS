@@ -1,8 +1,8 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException
-from api.schemas.employers import UserCreate
+from api.schemas.employers import UserCreate, UserLogin
 from passlib.context import CryptContext
-from api.core.security import hash_password
+from api.core.security import hash_password, verify_password
 
 app = FastAPI()
 
@@ -22,3 +22,19 @@ def signup(user: UserCreate):
     }
 
     return {"message": "User created successfully"}
+
+
+@app.post("/login")
+def login(user: UserLogin):
+    db_user = fake_users_db.get(user.username)
+
+    if not db_user:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+
+    if not verify_password(user.password, db_user["password"]):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+
+    return {
+        "message": "Login successful",
+        "username": user.username
+    }

@@ -17,3 +17,8 @@ class UserCreate(BaseModel):
         if not any(c in "!@#$%^&*()_+-=[]{}|;:,.<>?/`~" for c in v):
             raise ValueError("Password must contain at least one special character")
         return v
+
+
+class UserLogin(BaseModel):
+    username: str
+    password: str
