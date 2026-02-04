@@ -1,4 +1,6 @@
 from pydantic import BaseModel, validator
+from typing import Optional
+from datetime import date
 
 class UserCreate(BaseModel):
     username: str
@@ -22,3 +24,15 @@ class UserCreate(BaseModel):
 class UserLogin(BaseModel):
     username: str
     password: str
+
+
+class EmployeeCreate(BaseModel):
+    employee_id: str
+    full_name: str
+    email: str
+    phone: Optional[str]
+    department: str
+    designation: str
+    manager: Optional[str]
+    date_of_joining: date
+    location: str
